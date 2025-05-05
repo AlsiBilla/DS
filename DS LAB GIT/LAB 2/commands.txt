@@ -1,0 +1,34 @@
+Server:
+
+idlj -fall ReverseModule.idl
+javac *.java ReverseModule/*.java
+orbd -ORBInitialPort 1050&
+java ReverseServer -ORBInitialPort 1050& -ORBInitialHost localhost&
+
+Client:
+
+java ReverseClient -ORBInitialPort 1050 -ORBInitialHost localhost&
+
+// enter string
+//result will be Reverse String\
+
+
+idlj -fall Reverse.idl
+tnameserv -ORBInitialPort 1050
+
+java ReverseServer -ORBInitialPort 1050 -ORBInitialHost localhost
+java ReverseClient -ORBInitialPort 1050 -ORBInitialHost localhost
+
+
+
+
+
+idlj -fall Reverse.idl
+
+javac ReverseClient.java ReverseServer.java Reverseimpl.java ReverseModule/*.java
+
+tnameserv -ORBInitialPort 1050
+
+java ReverseServer -ORBInitialPort 1050 -ORBInitialHost localhost
+
+java ReverseClient -ORBInitialPort 1050 -ORBInitialHost localhost
